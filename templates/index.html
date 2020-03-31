@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Consumo</title>
+
+    <script>
+      function isZero(field)
+      {
+          return (isDigit(field) && field.value == 0);
+      }
+      function isDigit(field)
+      {
+          return !(isNaN(parseFloat(field.value)))
+      }
+
+      function isEmpty(field)
+      {
+        return (field.value.trim().length == 0);
+      }
+
+      function check()
+      {
+        const lblKm = document.getElementById("lblKm");
+        const lblTime = document.getElementById("lblTime");
+        const lblAvgCons = document.getElementById("lblAvgCons");
+
+        return (
+            (!isEmpty(lblKm) && isDigit(lblKm)) &&
+            (!isEmpty(lblTime) && !isZero(lblTime)) &&
+            (!isEmpty(lblAvgCons) && isDigit(lblAvgCons)))
+      }
+    </script>
+
+  </head>
+
+  <body>
+
+    <h1>Consumo</h1>
+
+    <form id="formCalculate"
+          action="/calcula"
+          method="post"
+          onsubmit="return check()">
+      <label for="lblKm">Kilómetros:</label>
+      <input type="text" id="lblKm" name="lblKm" />
+      <label for="lblTime">Tiempo (h):</label>
+      <input type="text" id="lblTime" name="lblTime" />
+      <label for="lblAvgCons">Consumo medio vehículo (l/km):</label>
+      <input type="text" id="lblAvgCons" name="lblAvgCons" />
+      <input type="submit" value="Calcula" />
+    </form>
+
+  </body>
+
+</html>
